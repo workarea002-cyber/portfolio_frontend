@@ -13,6 +13,15 @@
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .flex-start {
+    @apply flex justify-start items-start;
+  }
+
+  .flex-end {
+    @apply flex justify-end items-end;
+  }
+
   #home {
     @apply relative bg-[url(/assets/bgIMG.png)] bg-cover bg-center bg-repeat-y;
   }
@@ -81,7 +90,7 @@
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 }
 

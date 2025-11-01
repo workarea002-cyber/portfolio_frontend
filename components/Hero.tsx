@@ -18,14 +18,14 @@ const Hero = () => {
   return (
     <div
       id="home"
-      className="flex-center flex-1 w-full h-full flex-row pt-24 px-8 pb-0 max-xl:flex-col max-sm:pt-24 max-sm:px-4 max-sm:pb-8"
+      className="flex-center flex-1 w-full h-full flex-col pt-24 px-4 pb-8 sm:px-8 min-[900px]:flex-row min-[900px]:pb-0"
     >
       <motion.div
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
-        className="flex-[0.65] flex justify-start items-start flex-col h-full my-0 mx-8 xl:mx-20 max-md:mx-0 self-start"
+        className="flex-[0.60] flex-start self-start flex-col h-full min-[900px]:self-center min-[900px]:mr-4"
       >
-        <div className="w-full flex justify-end items-end flex-col max-xl:justify-start max-xl:items-start">
+        <div className="w-full flex-start flex-col min-[900px]:items-end">
           <div className="flex-center py-4 px-8 bg-white rounded-2xl flex-row w-auto shadow-lg shadow-gray-200">
             <span className="text-4xl">👋</span>
 
@@ -35,7 +35,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="flex-center flex-col mt-12 py-4 px-8 bg-white rounded-2xl w-auto shadow-lg shadow-gray-200">
+          <div className="flex-center flex-col mt-8 py-4 px-8 bg-white rounded-2xl w-auto shadow-lg shadow-gray-200">
             <p className="p-text text-right uppercase w-full">Web Developer</p>
           </div>
         </div>
@@ -44,10 +44,10 @@ const Hero = () => {
       <motion.div
         whileInView={{ opacity: [0, 1] }}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="flex-1 h-full flex justify-end items-end relative max-xl:my-8 max-xl:mx-0"
+        className="flex-1 h-full flex-end relative"
       >
         <Image
-          className="w-full object-contain z-1"
+          className="w-96 min-[900px]:w-full h-full object-contain z-1 mx-auto"
           src={images.profile}
           alt="profile_bg"
         />
@@ -67,12 +67,12 @@ const Hero = () => {
       <motion.div
         variants={scaleVariants}
         whileInView="whileInView"
-        className="flex-[0.75] flex flex-col justify-between items-start h-full ml-4 max-xl:w-full max-xl:flex-row max-xl:flex-wrap max-xl:ml-0"
+        className="flex-[0.60] flex flex-row justify-between items-start w-full h-full flex-wrap min-[900px]:flex-col"
       >
         {data.heroSkillImages.map(({ id, img }) => (
           <div
             key={id}
-            className={`circle-cmp flex-center rounded-full bg-white shadow-lg shadow-gray-200 ${id === 1 && "w-[100px] h-[100px] max-md:w-20 max-md:h-20"} ${id === 2 && "m-7 w-[150px] h-[150px] max-md:w-[110px] max-md:h-[110px]"} ${id === 3 && "w-[70px] h-[70px]"} max-xl:m-4`}
+            className={`circle-cmp flex-center rounded-full bg-white shadow-lg shadow-gray-200 ${id === 1 && "w-20 h-20 sm:w-[100px] sm:h-[100px]"} ${id === 2 && "m-4 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] min-[900px]:m-8"} ${id === 3 && "w-[70px] h-[70px] sm:w-20 sm:h-20"} m-3`}
           >
             <Image className="w-3/5 h-3/5" src={img} alt="circles" />
           </div>
