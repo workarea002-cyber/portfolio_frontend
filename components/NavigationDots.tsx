@@ -1,8 +1,12 @@
 import { data } from "@/constants";
 
-const NavigationDots = ({ active }) => {
+type NavigationDotsProps = {
+  active: string;
+};
+
+const NavigationDots = ({ active }: NavigationDotsProps) => {
   return (
-    <div className="flex-center flex-col p-4">
+    <div className="hidden sm:flex justify-center items-center flex-col p-4">
       {data.navLinks.map(({ name }, index) => (
         <a
           key={name + index}

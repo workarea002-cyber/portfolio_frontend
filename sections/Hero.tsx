@@ -1,4 +1,5 @@
 import { data, images } from "@/constants";
+import SectionWrapper from "@/wrapper/SectionWrapper";
 import { Variants } from "motion";
 import * as motion from "motion/react-client";
 import Image from "next/image";
@@ -16,16 +17,13 @@ const scaleVariants: Variants = {
 
 const Hero = () => {
   return (
-    <div
-      id="home"
-      className="flex-center flex-1 w-full h-full flex-col pt-24 px-4 pb-8 sm:px-8 min-[900px]:flex-row min-[900px]:pb-0"
-    >
+    <div className="flex-center flex-1 w-full h-full flex-col pt-24 px-4 pb-8 sm:px-8 xl:flex-row xl:pb-0">
       <motion.div
         whileInView={{ x: [-100, 0], opacity: [0, 1] }}
         transition={{ duration: 0.5 }}
-        className="flex-[0.60] flex-start self-start flex-col h-full min-[900px]:self-center min-[900px]:mr-4"
+        className="flex-[0.45] flex-start self-start flex-col h-full lg:mr-4"
       >
-        <div className="w-full flex-start flex-col min-[900px]:items-end">
+        <div className="w-full flex-start flex-col xl:items-end">
           <div className="flex-center py-4 px-8 bg-white rounded-2xl flex-row w-auto shadow-lg shadow-gray-200">
             <span className="text-4xl">👋</span>
 
@@ -44,10 +42,10 @@ const Hero = () => {
       <motion.div
         whileInView={{ opacity: [0, 1] }}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="flex-1 h-full flex-end relative"
+        className="flex-1 w-full h-full flex-end relative"
       >
         <Image
-          className="w-96 min-[900px]:w-full h-full object-contain z-1 mx-auto"
+          className="object-contain z-1 mx-auto"
           src={images.profile}
           alt="profile_bg"
         />
@@ -67,12 +65,12 @@ const Hero = () => {
       <motion.div
         variants={scaleVariants}
         whileInView="whileInView"
-        className="flex-[0.60] flex flex-row justify-between items-start w-full h-full flex-wrap min-[900px]:flex-col"
+        className="flex-[0.55] flex flex-row justify-between items-start w-full flex-wrap xl:flex-col"
       >
         {data.heroSkillImages.map(({ id, img }) => (
           <div
             key={id}
-            className={`circle-cmp flex-center rounded-full bg-white shadow-lg shadow-gray-200 ${id === 1 && "w-20 h-20 sm:w-[100px] sm:h-[100px]"} ${id === 2 && "m-4 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] min-[900px]:m-8"} ${id === 3 && "w-[70px] h-[70px] sm:w-20 sm:h-20"} m-3`}
+            className={`circle-cmp flex-center rounded-full bg-white shadow-lg shadow-gray-200 ${id === 1 && "w-20 h-20 sm:w-[100px] sm:h-[100px]"} ${id === 2 && "m-4 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] xl:m-8"} ${id === 3 && "w-[70px] h-[70px] sm:w-20 sm:h-20"} m-3`}
           >
             <Image className="w-3/5 h-3/5" src={img} alt="circles" />
           </div>
@@ -82,4 +80,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default SectionWrapper(Hero, "home");

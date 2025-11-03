@@ -33,4 +33,19 @@ const heroSkillImages = [
   },
 ];
 
-export default { navLinks, heroSkillImages };
+const workTech = [
+  {
+    name: "WordPress",
+  },
+  {
+    name: "React JS",
+  },
+  {
+    name: "Next JS",
+  },
+  {
+    name: "Mobile App",
+  },
+];
+
+export default { navLinks, heroSkillImages, workTech };
