@@ -35,6 +35,9 @@ const heroSkillImages = [
 
 const workTech = [
   {
+    name: "All",
+  },
+  {
     name: "WordPress",
   },
   {

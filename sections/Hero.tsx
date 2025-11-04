@@ -24,7 +24,7 @@ const Hero = () => {
         className="flex-[0.45] flex-start self-start flex-col h-full lg:mr-4"
       >
         <div className="w-full flex-start flex-col xl:items-end">
-          <div className="flex-center py-4 px-8 bg-white rounded-2xl flex-row w-auto shadow-lg shadow-gray-200">
+          <div className="flex-center py-4 px-8 bg-white rounded-2xl flex-row w-auto card-shadow">
             <span className="text-4xl">👋</span>
 
             <div className="ml-5">
@@ -33,7 +33,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="flex-center flex-col mt-8 py-4 px-8 bg-white rounded-2xl w-auto shadow-lg shadow-gray-200">
+          <div className="flex-center flex-col mt-8 py-4 px-8 bg-white rounded-2xl w-auto card-shadow">
             <p className="p-text text-right uppercase w-full">Web Developer</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Hero = () => {
         {data.heroSkillImages.map(({ id, img }) => (
           <div
             key={id}
-            className={`circle-cmp flex-center rounded-full bg-white shadow-lg shadow-gray-200 ${id === 1 && "w-20 h-20 sm:w-[100px] sm:h-[100px]"} ${id === 2 && "m-4 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] xl:m-8"} ${id === 3 && "w-[70px] h-[70px] sm:w-20 sm:h-20"} m-3`}
+            className={`circle-cmp flex-center rounded-full bg-white card-shadow ${id === 1 && "w-20 h-20 sm:w-[100px] sm:h-[100px]"} ${id === 2 && "m-4 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] xl:m-8"} ${id === 3 && "w-[70px] h-[70px] sm:w-20 sm:h-20"} m-3`}
           >
             <Image className="w-3/5 h-3/5" src={img} alt="circles" />
           </div>

@@ -7,73 +7,49 @@
   --color-lightGray: oklch(0.9189 0 0);
   --color-gray: oklch(0.5631 0.0309 260.27);
   --color-brown: oklch(0.3584 0.0399 319.46);
+  --font-dm-sans: var(--font-dm-sans);
+}
+
+@layer base {
+  body {
+    @apply font-dm-sans bg-primary;
+  }
+}
+
+@utility flex-center {
+  @apply flex justify-center items-center;
+}
+
+@utility flex-start {
+  @apply flex justify-start items-start;
+}
+
+@utility flex-end {
+  @apply flex justify-end items-end;
+}
+
+@utility card-shadow {
+  @apply shadow-lg shadow-gray-200;
 }
 
 @layer components {
-  .flex-center {
-    @apply flex justify-center items-center;
-  }
-
-  .flex-start {
-    @apply flex justify-start items-start;
-  }
-
-  .flex-end {
-    @apply flex justify-end items-end;
-  }
-
   #home {
     @apply relative bg-[url(/assets/bgIMG.png)] bg-cover bg-center bg-repeat-y;
   }
-}
 
-.app {
-  background-color: var(--color-primary);
-  font-family: var(--font-dm-sans), sans-serif;
-}
+  .head-text {
+    @apply text-3xl font-extrabold text-center text-black capitalize sm:text-4xl min-[2000px]:text-6xl;
 
-.head-text {
-  font-size: 2.75rem;
-  font-weight: 800;
-  text-align: center;
-  color: var(--color-black);
-  text-transform: capitalize;
-
-  span {
-    color: var(--color-secondary);
+    span {
+      @apply text-secondary;
+    }
   }
 
-  @media screen and (min-width: 2000px) {
-    font-size: 4rem;
+  .p-text {
+    @apply text-sm text-left text-gray leading-6 min-[2000px]:text-3xl;
   }
 
-  @media screen and (max-width: 450px) {
-    font-size: 1.7rem;
-  }
-}
-
-.p-text {
-  font-size: 0.8rem;
-  text-align: left;
-  color: var(--color-gray);
-  line-height: 1.5;
-
-  @media screen and (min-width: 2000px) {
-    font-size: 1.75rem;
-  }
-}
-
-.bold-text {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--color-black);
-  text-align: left;
-
-  @media screen and (min-width: 2000px) {
-    font-size: 2rem;
-  }
-
-  @media screen and (max-width: 450px) {
-    font-size: 0.9rem;
+  .bold-text {
+    @apply text-sm min-[2000px]:text-3xl text-left text-black font-extrabold sm:text-base;
   }
 }
