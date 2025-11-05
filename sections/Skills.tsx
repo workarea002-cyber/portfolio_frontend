@@ -1,59 +1,44 @@
 "use client";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import Image, { ImageLoaderProps } from "next/image";
-import { motion, stagger, TargetAndTransition } from "motion/react";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-import { client } from "@/sanity/client";
 import { urlFor } from "@/sanity/sanityImageUrl";
-import SectionWrapper from "@/wrapper/SectionWrapper";
+import { MotionWrap, SectionWrapper } from "@/wrapper";
+import type { Experience, Skill } from "@/sanity/types";
 
-interface Skills {
-  name: string;
-  icon: SanityImageSource; // you can refine later to SanityImageSource
-  bgColor?: string;
-}
-interface Experiences {
-  year: string;
-  works: string[];
+interface SkillAndExperience {
+  skills: Skill[];
+  experience: Experience[];
 }
 
-const Skills = () => {
-  const [skills, setSkills] = useState<Skills[]>([]);
-  const [experiences, setExperiences] = useState<Experiences[]>([]);
+const Skills = ({ skills, experience }: SkillAndExperience) => {
+  const [mySkills, setMySkills] = useState<Skill[]>(skills);
+  const [experiences, setExperiences] = useState<Experience[]>(experience);
 
   useEffect(() => {
-    const skillsQuery = '*[_type == "skills"]';
-    const experienceQuery = '*[_type == "experiences"]';
-
-    client.fetch(skillsQuery).then((data) => {
-      setSkills(data);
-      console.log(skills);
-    });
-    client.fetch(experienceQuery).then((data) => {
-      setExperiences(data);
-      console.log(experiences);
-    });
-  }, []);
+    setMySkills(skills);
+    setExperiences(experience);
+  }, [skills, experience]);
 
   return (
     <>
       <h2 className="head-text">Skills & Experience</h2>
 
       {/* app__skills-container */}
-      <div className="w-full lg:w-4/5 flex flex-row mt-12">
+      <div className="w-full xl:w-4/5 flex lg:flex-row mt-12 flex-col">
         {/* app__skills-list */}
-        <motion.div className="flex-1 flex-center flex-wrap lg:flex-start mr-0 lg:mr-20">
-          {skills.map(({ name, icon, bgColor }) => (
+        <motion.div className="flex-1 flex-center flex-wrap lg:flex-start mr-0 lg:mr-12">
+          {mySkills.map(({ _id, name, icon, bgColor }) => (
             // app__skills-item app__flex
             <motion.div
               whileInView={{ opacity: [0, 1] }}
               transition={{ duration: 0.5 }}
               className="flex-center flex-col text-center m-4 transition-all duration-300 ease-in-out"
-              key={name}
+              key={_id}
             >
               <div
-                className={`flex-center w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] rounded-full bg-[#fef4f5] bg-${bgColor} hover:shadow-lg min-[2000px]:w-[150px] min-[2000px]:h-[150px] min-[2000px]:my-4 min-[2000px]:mx-8`}
+                className={`flex-center w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] rounded-full ${bgColor && `bg-${bgColor}`} bg-primary hover:custom-shadow shadow-black/5 min-[2000px]:w-[150px] min-[2000px]:h-[150px] min-[2000px]:my-4 min-[2000px]:mx-8`}
               >
                 <Image
                   src="/assets/placeholder.svg"
@@ -74,18 +59,34 @@ const Skills = () => {
         </motion.div>
 
         {/* app__skills-exp */}
-        <motion.div className="">
-          {experiences.map((experience) => (
-            <motion.div>
+        <motion.div className="flex-1 flex-start flex-col lg:mt-0 mt-8">
+          {experiences?.map(({ _id, works, year }) => (
+            // app__skills-exp-item
+            <motion.div key={_id} className="w-full flex-start flex-row my-4">
+              {/* app__skills-exp-year */}
+              <div className="mr-4 sm:mr-12">
+                <p className="bold-text font-extrabold text-secondary">
+                  {year}
+                </p>
+              </div>
               {/* app__skills-exp-works */}
-              <motion.div>
-                {experience.works.map(() => (
+              <motion.div className="flex-1">
+                {works?.map(({ _id, role, company, description }) => (
                   // app__skills-exp-work
                   <motion.div
+                    key={_id}
                     whileInView={{ opacity: [0, 1] }}
                     transition={{ duration: 0.5 }}
-                    className=""
-                  ></motion.div>
+                    className="flex-start flex-col mb-4 cursor-pointer"
+                  >
+                    <h4 className="bold-text font-medium">{role}</h4>
+                    <p className="p-text font-normal text-gray mt-1">
+                      {company}
+                    </p>
+                    <p className="p-text font-normal text-gray mt-1.5">
+                      {description}
+                    </p>
+                  </motion.div>
                 ))}
               </motion.div>
             </motion.div>
@@ -96,4 +97,4 @@ const Skills = () => {
   );
 };
 
-export default SectionWrapper(Skills, "skills");
+export default SectionWrapper(MotionWrap(Skills), "skills", "bg-white");

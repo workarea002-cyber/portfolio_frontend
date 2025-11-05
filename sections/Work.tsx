@@ -2,32 +2,15 @@
 import Image, { ImageLoaderProps } from "next/image";
 import { motion, stagger, TargetAndTransition } from "motion/react";
 import { useEffect, useState } from "react";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-import { data } from "@/constants";
-import { client } from "@/sanity/client";
-import { urlFor } from "@/sanity/sanityImageUrl";
-import SectionWrapper from "@/wrapper/SectionWrapper";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 
-interface Work {
-  _id: string;
-  title: string;
-  imgUrl: SanityImageSource; // you can refine later to SanityImageSource
-  description?: string;
-  projectLink?: string;
-  codeLink?: string;
-  tags: string[];
-}
+import { data } from "@/constants";
+import type { Project } from "@/sanity/types";
+import { urlFor } from "@/sanity/sanityImageUrl";
+import { MotionWrap, SectionWrapper } from "@/wrapper";
 
-interface animateCard {
-  y: number;
-  opacity: number;
-}
-
-const Work = () => {
-  const [works, setWorks] = useState<Work[]>([]);
-  const [filterWorks, setFilterWorks] = useState<Work[]>([]);
+const Work = ({ projects }: { projects: Project[] }) => {
+  const [filterWorks, setFilterWorks] = useState<Project[]>(projects);
   const [activeFilter, setActiveFilter] = useState("All");
   const [animateCard, setAnimateCard] = useState<TargetAndTransition>({
     y: 0,
@@ -35,13 +18,8 @@ const Work = () => {
   });
 
   useEffect(() => {
-    const query = '*[_type == "works"]';
-
-    client.fetch(query).then((data) => {
-      setWorks(data);
-      setFilterWorks(data);
-    });
-  }, []);
+    setFilterWorks(projects);
+  }, [projects]);
 
   const handleWorkFilter = ({ name }: { name: string }) => {
     setActiveFilter(name);
@@ -51,9 +29,11 @@ const Work = () => {
       setAnimateCard({ y: 0, opacity: 1 });
 
       if (name === "All") {
-        setFilterWorks(works);
+        setFilterWorks(projects);
       } else {
-        setFilterWorks(works.filter((work) => work.tags.includes(name)));
+        setFilterWorks(
+          projects.filter((project) => project.tags.includes(name))
+        );
       }
     }, 500);
   };
@@ -97,7 +77,7 @@ const Work = () => {
             // app__work-item
             <div
               key={_id}
-              className="flex-center max-w-2xs w-full grow sm:w-[35%] lg:w-[25%] flex-col m-4 lg:m-8 p-4 rounded-lg bg-white text-black cursor-pointer transition-all duration-300 ease-in-out hover:card-shadow min-[2000px]:h-[470px] min-[2000px]:p-5 min-[2000px]:rounded-lg"
+              className="flex-center max-w-2xs w-full grow sm:w-[35%] lg:w-[25%] flex-col m-4 lg:m-8 p-4 rounded-lg bg-white text-black cursor-pointer transition-all duration-300 ease-in-out  hover:custom-shadow shadow-black/5 min-[2000px]:h-[470px] min-[2000px]:p-5 min-[2000px]:rounded-lg"
             >
               {/* app__work-img */}
               <div className="flex-center w-full aspect-video relative min-[2000px]:h-[350px]">
@@ -161,4 +141,4 @@ const Work = () => {
   );
 };
 
-export default SectionWrapper(Work, "work");
+export default SectionWrapper(MotionWrap(Work), "work");

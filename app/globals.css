@@ -28,8 +28,8 @@
   @apply flex justify-end items-end;
 }
 
-@utility card-shadow {
-  @apply shadow-lg shadow-gray-200;
+@utility custom-shadow {
+  @apply shadow-[0_0_25px];
 }
 
 @layer components {
