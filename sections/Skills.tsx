@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
 import Image, { ImageLoaderProps } from "next/image";
 
+import { images } from "@/constants";
 import { urlFor } from "@/sanity/sanityImageUrl";
 import { MotionWrap, SectionWrapper } from "@/wrapper";
 import type { Experience, Skill } from "@/sanity/types";
@@ -13,14 +13,6 @@ interface SkillAndExperience {
 }
 
 const Skills = ({ skills, experience }: SkillAndExperience) => {
-  const [mySkills, setMySkills] = useState<Skill[]>(skills);
-  const [experiences, setExperiences] = useState<Experience[]>(experience);
-
-  useEffect(() => {
-    setMySkills(skills);
-    setExperiences(experience);
-  }, [skills, experience]);
-
   return (
     <>
       <h2 className="head-text">Skills & Experience</h2>
@@ -29,7 +21,7 @@ const Skills = ({ skills, experience }: SkillAndExperience) => {
       <div className="w-full xl:w-4/5 flex lg:flex-row mt-12 flex-col">
         {/* app__skills-list */}
         <motion.div className="flex-1 flex-center flex-wrap lg:flex-start mr-0 lg:mr-12">
-          {mySkills.map(({ _id, name, icon, bgColor }) => (
+          {skills.map(({ _id, name, icon, bgColor }) => (
             // app__skills-item app__flex
             <motion.div
               whileInView={{ opacity: [0, 1] }}
@@ -41,7 +33,7 @@ const Skills = ({ skills, experience }: SkillAndExperience) => {
                 className={`flex-center w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] rounded-full ${bgColor && `bg-${bgColor}`} bg-primary hover:custom-shadow shadow-black/5 min-[2000px]:w-[150px] min-[2000px]:h-[150px] min-[2000px]:my-4 min-[2000px]:mx-8`}
               >
                 <Image
-                  src="/assets/placeholder.svg"
+                  src={images.placeholder}
                   width={300}
                   height={200}
                   alt={name}
@@ -60,7 +52,7 @@ const Skills = ({ skills, experience }: SkillAndExperience) => {
 
         {/* app__skills-exp */}
         <motion.div className="flex-1 flex-start flex-col lg:mt-0 mt-8">
-          {experiences?.map(({ _id, works, year }) => (
+          {experience?.map(({ _id, works, year }) => (
             // app__skills-exp-item
             <motion.div key={_id} className="w-full flex-start flex-row my-4">
               {/* app__skills-exp-year */}

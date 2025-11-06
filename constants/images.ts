@@ -17,6 +17,11 @@ import redux from "../public/assets/redux.png";
 import sass from "../public/assets/sass.png";
 import typescript from "../public/assets/typescript.png";
 import vue from "../public/assets/vue.png";
+import astra from "../public/assets/astra.svg";
+import spectra from "../public/assets/spectra.svg";
+import elementor from "../public/assets/elementor.svg";
+import gutenberg from "../public/assets/gutenberg.svg";
+import wordpress from "../public/assets/wordpress.svg";
 
 import about01 from "../public/assets/about01.png";
 import about02 from "../public/assets/about02.png";
@@ -34,6 +39,8 @@ import bolt from "../public/assets/bolt.png";
 import nb from "../public/assets/nb.png";
 import skype from "../public/assets/skype.png";
 import spotify from "../public/assets/spotify.png";
+
+import placeholder from "../public/assets/placeholder.svg";
 
 export default {
   email,
@@ -69,4 +76,10 @@ export default {
   nb,
   skype,
   spotify,
+  placeholder,
+  astra,
+  spectra,
+  elementor,
+  gutenberg,
+  wordpress,
 };

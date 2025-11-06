@@ -6,6 +6,12 @@ export interface Skill {
   icon: SanityImageSource;
   bgColor?: string;
 }
+export interface About {
+  _id: string;
+  title: string;
+  imgUrl: SanityImageSource;
+  description: string;
+}
 export interface Work {
   _id: string;
   role: string;

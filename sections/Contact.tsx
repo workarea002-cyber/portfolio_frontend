@@ -1,8 +1,10 @@
 "use client";
-import { client } from "@/sanity/client";
-import { MotionWrap, SectionWrapper } from "@/wrapper";
 import Image from "next/image";
 import { useState } from "react";
+
+import { images } from "@/constants";
+import { client } from "@/sanity/client";
+import { MotionWrap, SectionWrapper } from "@/wrapper";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -49,7 +51,7 @@ const Contact = () => {
         {/* app__footer-card */}
         <div className="min-w-2xs flex-center flex-row my-4 p-4 rounded-lg cursor-pointer bg-[#fef4f5] transition-all duration-300 ease-in-out hover:custom-shadow shadow-black/5 w-full">
           <Image
-            src="/assets/email.png"
+            src={images.email}
             alt="email"
             width={40}
             height={40}

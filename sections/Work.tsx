@@ -1,10 +1,10 @@
 "use client";
 import Image, { ImageLoaderProps } from "next/image";
-import { motion, stagger, TargetAndTransition } from "motion/react";
+import { motion, TargetAndTransition } from "motion/react";
 import { useEffect, useState } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 
-import { data } from "@/constants";
+import { data, images } from "@/constants";
 import type { Project } from "@/sanity/types";
 import { urlFor } from "@/sanity/sanityImageUrl";
 import { MotionWrap, SectionWrapper } from "@/wrapper";
@@ -62,7 +62,7 @@ const Work = ({ projects }: { projects: Project[] }) => {
       <motion.div
         animate={animateCard}
         transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="flex-center flex-wrap"
+        className="flex-start flex-wrap"
       >
         {filterWorks.map(
           ({
@@ -77,60 +77,66 @@ const Work = ({ projects }: { projects: Project[] }) => {
             // app__work-item
             <div
               key={_id}
-              className="flex-center max-w-2xs w-full grow sm:w-[35%] lg:w-[25%] flex-col m-4 lg:m-8 p-4 rounded-lg bg-white text-black cursor-pointer transition-all duration-300 ease-in-out  hover:custom-shadow shadow-black/5 min-[2000px]:h-[470px] min-[2000px]:p-5 min-[2000px]:rounded-lg"
+              className="flex-center w-full grow sm:w-[35%] flex-col m-4 lg:m-8 p-4 rounded-lg bg-white text-black cursor-pointer transition-all duration-300 ease-in-out  hover:custom-shadow shadow-black/5 min-[2000px]:p-5 min-[2000px]:rounded-lg"
             >
               {/* app__work-img */}
-              <div className="flex-center w-full aspect-video relative min-[2000px]:h-[350px]">
+              <div className="flex-center w-full relative">
                 <Image
-                  src="/assets/placeholder.svg"
+                  src={images.placeholder}
                   width={300}
                   height={200}
                   alt={title}
                   loader={({ width, quality = 100 }: ImageLoaderProps) =>
                     urlFor(imgUrl).width(width).quality(quality).url()
                   }
-                  className="aspect-video rounded-lg object-cover"
+                  className="aspect-3/2 rounded-lg object-cover w-full"
                 />
+
                 {/* app__work-hover */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.25,
-                    ease: "easeInOut",
-                    delayChildren: stagger(0.5),
-                  }}
-                  className="flex-center absolute top-0 left-0 bottom-0 right-0 w-full h-full bg-black/50 rounded-lg transition-all duration-300 ease-in-out"
-                >
+                <div className="flex-center gap-1 m-2 absolute top-0 right-0 rounded-lg transition-all duration-300 ease-in-out">
                   <a href={projectLink} target="_blank" rel="noreferrer">
                     <motion.div
                       whileInView={{ scale: [0, 1] }}
                       whileHover={{ scale: [1, 0.9] }}
-                      transition={{ duration: 0.25 }}
-                      className="flex-center w-[50px] h-[50px] rounded-full bg-black/50 text-white m-4 font-extrabold cursor-pointer transition-all duration-300 ease-in-out"
+                      transition={{ duration: 0.1 }}
+                      className="flex-center w-7 h-7 rounded-full bg-linear-to-tr from-gray-500 to-zinc-950  text-white font-extrabold cursor-pointer transition-all duration-300 ease-in-out"
                     >
                       <AiFillEye className="w-1/2 text-white" />
                     </motion.div>
                   </a>
+
                   <a href={codeLink} target="_blank" rel="noreferrer">
                     <motion.div
                       whileInView={{ scale: [0, 1] }}
                       whileHover={{ scale: [1, 0.9] }}
                       transition={{ duration: 0.25 }}
-                      className="flex-center w-[50px] h-[50px] rounded-full bg-black/50 text-white m-4 font-extrabold cursor-pointer transition-all duration-300 ease-in-out"
+                      className="flex-center w-7 h-7 rounded-full bg-linear-to-tr from-gray-500 to-zinc-950 text-white font-extrabold cursor-pointer transition-all duration-300 ease-in-out"
                     >
                       <AiFillGithub className="w-1/2 text-white" />
                     </motion.div>
                   </a>
-                </motion.div>
+                </div>
               </div>
 
-              <div className="flex-center p-2 w-full relative flex-col">
+              <div className="flex-start p-2 w-full relative flex-col">
                 <h4 className="bold-text mt-4 min-[2000px]:mt-12">{title}</h4>
-                <p className="p-text mt-2.5">{description}</p>
+                <p className="p-text mt-2.5 line-clamp-2">{description}</p>
 
-                <div className="flex-center absolute py-2 px-4 rounded-lg bg-white -top-6">
-                  <p className="p-text">{tags[0]}</p>
+                <div className="flex flex-wrap w-full mt-4 gap-1">
+                  {tags.map((tag, index) => (
+                    <div
+                      key={index}
+                      className="bg-white rounded flex-center border border-lightGray py-1 px-1.5 gap-1.5"
+                    >
+                      <Image
+                        src={images[tag.toLowerCase() as keyof typeof images]}
+                        width={24}
+                        height={24}
+                        alt={tag}
+                      />
+                      <p className="p-text rounded-full text-xs">{tag}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

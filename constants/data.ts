@@ -8,13 +8,13 @@ const navLinks = [
     name: "about",
   },
   {
-    name: "contact",
-  },
-  {
     name: "work",
   },
   {
     name: "skills",
+  },
+  {
+    name: "contact",
   },
 ];
 

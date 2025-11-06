@@ -1,10 +1,11 @@
-import { getExperience, getProjects, getSkills } from "@/sanity/api";
+import { getAbout, getExperience, getProjects, getSkills } from "@/sanity/api";
 import { About, Contact, Hero, Skills, Work } from "@/sections";
 export const revalidate = 3600;
 
 const Home = async () => {
-  const projects = await getProjects();
-  const [skills, experience] = await Promise.all([
+  const [abouts, projects, skills, experience] = await Promise.all([
+    getAbout(),
+    getProjects(),
     getSkills(),
     getExperience(),
   ]);
@@ -13,7 +14,7 @@ const Home = async () => {
     <main>
       <div className="app">
         <Hero />
-        <About />
+        <About abouts={abouts} />
         <Work projects={projects} />
         <Skills skills={skills} experience={experience} />
         <Contact />
